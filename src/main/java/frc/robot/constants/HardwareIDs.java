@@ -19,5 +19,5 @@ public class HardwareIDs {
     }
 
     public static final int kGyroID = 0;
-    
+    public static final int kArmServoID = 4;
 }

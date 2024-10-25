@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.xrp.XRPOnBoardIO;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -56,12 +55,12 @@ public class RobotContainer {
         .onFalse(new PrintCommand("USER Button Released"));
 
     m_controller.a()
-        .onTrue(new InstantCommand(() -> m_arm.setAngle(45.0), m_arm))
-        .onFalse(new InstantCommand(() -> m_arm.setAngle(0.0), m_arm));
+        .onTrue(m_arm.setAngleDegreesCommand(45))
+        .onFalse(m_arm.setAngleDegreesCommand(0.0));
 
     m_controller.b()
-        .onTrue(new InstantCommand(() -> m_arm.setAngle(90.0), m_arm))
-        .onFalse(new InstantCommand(() -> m_arm.setAngle(0.0), m_arm));
+        .onTrue(m_arm.setAngleDegreesCommand(90.0))
+        .onFalse(m_arm.setAngleDegreesCommand(0.0));
 
     // Setup the SmartDashboard chooser for autonomous routines
     m_chooser.setDefaultOption("Auto Routine Distance",  m_autonomousCommandFactory.autonomousDistanceCommand(m_drivetrain));
