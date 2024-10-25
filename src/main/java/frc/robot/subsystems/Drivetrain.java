@@ -17,23 +17,28 @@ import edu.wpi.first.wpilibj2.command.FunctionalCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
-
 import static frc.robot.constants.DrivetrainConstants.kCountsPerRevolution;
 import static frc.robot.constants.DrivetrainConstants.kInchesPerDegree;
 import static frc.robot.constants.DrivetrainConstants.kWheelDiameterInch;
+import static frc.robot.constants.HardwareIDs.MotorIDs.kLeftDriveMotorID;
+import static frc.robot.constants.HardwareIDs.MotorIDs.kRightDriveMotorID;
+import static frc.robot.constants.HardwareIDs.EncoderIDs.kLeftEncoderA;
+import static frc.robot.constants.HardwareIDs.EncoderIDs.kLeftEncoderB;
+import static frc.robot.constants.HardwareIDs.EncoderIDs.kRightEncoderA;
+import static frc.robot.constants.HardwareIDs.EncoderIDs.kRightEncoderB;
 
 public class Drivetrain extends SubsystemBase {
 
 
   // The XRP has the left and right motors set to
   // channels 0 and 1 respectively
-  private final XRPMotor m_leftMotor = new XRPMotor(0);
-  private final XRPMotor m_rightMotor = new XRPMotor(1);
+  private final XRPMotor m_leftMotor = new XRPMotor(kLeftDriveMotorID);
+  private final XRPMotor m_rightMotor = new XRPMotor(kRightDriveMotorID);
 
   // The XRP has onboard encoders that are hardcoded
   // to use DIO pins 4/5 and 6/7 for the left and right
-  private final Encoder m_leftEncoder = new Encoder(4, 5);
-  private final Encoder m_rightEncoder = new Encoder(6, 7);
+  private final Encoder m_leftEncoder = new Encoder(kLeftEncoderA, kLeftEncoderB);
+  private final Encoder m_rightEncoder = new Encoder(kRightEncoderA, kRightEncoderB);
 
   // Set up the differential drive controller
   private final DifferentialDrive m_diffDrive =
@@ -172,6 +177,14 @@ public class Drivetrain extends SubsystemBase {
     return run(()->arcadeDrive(driveVelocity, rotateVelocity));
   }
 
+  
+  /**
+   * Creates a command that turns the drivetrain at a specified speed for a certain duration of time.
+   * 
+   * @param speed The speed at which the drivetrain should turn. Positive values turn to the right, negative values turn to the left.
+   * @param duration The duration of time (in milliseconds) for which the drivetrain should turn.
+   * @return The command object that turns the drivetrain for the specified duration at the specified speed.
+   */
   public Command turnTimeCommand(double speed, double duration){
     return new FunctionalCommand(
         () -> this.m_startTime = System.currentTimeMillis(), 
@@ -180,6 +193,13 @@ public class Drivetrain extends SubsystemBase {
         ()-> (System.currentTimeMillis() - m_startTime) >= duration,this);
   }
 
+  /**
+   * Creates a command that drives the robot at a specified speed for a specified duration of time.
+   * 
+   * @param speed The speed at which the robot should drive. Positive values indicate forward motion, while negative values indicate backward motion.
+   * @param duration The duration of time, in milliseconds, for which the robot should drive at the specified speed.
+   * @return The command object that drives the robot for the specified duration at the specified speed.
+   */
   public Command driveTimeCommand(double speed, double duration){
     return new FunctionalCommand(
         () -> this.m_startTime = System.currentTimeMillis(), 
@@ -188,6 +208,13 @@ public class Drivetrain extends SubsystemBase {
         ()-> (System.currentTimeMillis() - m_startTime) >= duration,this);
   }
 
+  /**
+   * Creates a command to drive a certain distance at a given speed.
+   * 
+   * @param speed The speed at which to drive (between -1.0 and 1.0).
+   * @param distance The distance to drive in inches.
+   * @return The command to drive the specified distance at the specified speed.
+   */
   public Command driveDistanceCommand(double speed, double distance){
     return new FunctionalCommand(
         () -> resetEncoders(), 
@@ -196,6 +223,13 @@ public class Drivetrain extends SubsystemBase {
         ()-> getAverageDistanceInch() >= distance,this);
   }
 
+  /**
+   * Creates a command to turn the drivetrain by a specified number of degrees at a given speed.
+   * 
+   * @param speed The speed at which the drivetrain should turn.
+   * @param degrees The number of degrees to turn the drivetrain.
+   * @return The command to turn the drivetrain.
+   */
   public Command turnDegreesCommand(double speed, double degrees){
     return new FunctionalCommand(
         () -> resetEncoders(), 

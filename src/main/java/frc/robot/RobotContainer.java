@@ -41,6 +41,9 @@ public class RobotContainer {
     configureButtonBindings();
   }
 
+  /**
+   * Configures the button bindings for the robot.
+   */
   private void configureButtonBindings() {
     // Default command is arcade drive. This will run unless another command
     // is scheduled over it.
@@ -60,7 +63,7 @@ public class RobotContainer {
         .onTrue(new InstantCommand(() -> m_arm.setAngle(90.0), m_arm))
         .onFalse(new InstantCommand(() -> m_arm.setAngle(0.0), m_arm));
 
-    // Setup SmartDashboard options
+    // Setup the SmartDashboard chooser for autonomous routines
     m_chooser.setDefaultOption("Auto Routine Distance",  m_autonomousCommandFactory.autonomousDistanceCommand(m_drivetrain));
     m_chooser.addOption("Auto Routine Time", m_autonomousCommandFactory.autonomousTimeCommand(m_drivetrain));
     SmartDashboard.putData(m_chooser);
