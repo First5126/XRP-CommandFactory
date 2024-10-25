@@ -39,6 +39,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    configureAutonomousCommands();
   }
 
   /**
@@ -62,13 +63,13 @@ public class RobotContainer {
     m_controller.b()
         .onTrue(m_arm.setAngleDegreesCommand(90.0))
         .onFalse(m_arm.setAngleDegreesCommand(KArmMinDegrees));
-
-    // Setup the SmartDashboard chooser for autonomous routines
-    m_chooser.setDefaultOption("Auto Routine Distance",  m_autonomousCommandFactory.autonomousDistanceCommand(m_drivetrain));
-    m_chooser.addOption("Auto Routine Time", m_autonomousCommandFactory.autonomousTimeCommand(m_drivetrain));
-    SmartDashboard.putData(m_chooser);
   }
 
+  private void configureAutonomousCommands() {
+       // Setup the SmartDashboard chooser for autonomous routines
+    m_chooser.setDefaultOption("Auto Routine Distance",  m_autonomousCommandFactory.autonomousDistanceCommand(m_drivetrain));
+    m_chooser.addOption("Auto Routine Time", m_autonomousCommandFactory.autonomousTimeCommand(m_drivetrain));
+    SmartDashboard.putData(m_chooser);  }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
@@ -77,6 +78,5 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     return m_chooser.getSelected();
   }
-
 
 }
