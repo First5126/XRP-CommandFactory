@@ -15,4 +15,11 @@ public class AutonomousCommandFactory {
         .andThen(drivetrain.driveTimeCommand(-0.6,2.0))
         .andThen(drivetrain.turnTimeCommand(0.5,1.3));
     }
+
+    public Command autonomousDistanceCommand(Drivetrain drivetrain){
+        return drivetrain.driveDistanceCommand(-0.5,10)
+        .andThen(drivetrain.turnDegreesCommand(-0.5,180))
+        .andThen(drivetrain.driveDistanceCommand(-0.5,10))
+        .andThen(drivetrain.turnDegreesCommand(0.5,180));
+    }
 }

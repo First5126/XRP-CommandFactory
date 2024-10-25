@@ -4,7 +4,6 @@
 
 package frc.robot.subsystems;
 
-import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
 import edu.wpi.first.util.sendable.SendableRegistry;
@@ -17,15 +16,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.FunctionalCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.constants.DrivetrainConstants;
+
+
+import static frc.robot.constants.DrivetrainConstants.kCountsPerRevolution;
 import static frc.robot.constants.DrivetrainConstants.kInchesPerDegree;
+import static frc.robot.constants.DrivetrainConstants.kWheelDiameterInch;
 
 public class Drivetrain extends SubsystemBase {
-  private static final double kGearRatio =
-      (30.0 / 14.0) * (28.0 / 16.0) * (36.0 / 9.0) * (26.0 / 8.0); // 48.75:1
-  private static final double kCountsPerMotorShaftRev = 12.0;
-  private static final double kCountsPerRevolution = kCountsPerMotorShaftRev * kGearRatio; // 585.0
-  private static final double kWheelDiameterInch = 2.3622; // 60 mm
+
 
   // The XRP has the left and right motors set to
   // channels 0 and 1 respectively
