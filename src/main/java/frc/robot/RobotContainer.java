@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.sensors.UltrasonicSensor;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -27,7 +28,7 @@ public class RobotContainer {
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final XRPOnBoardIO m_onboardIO = new XRPOnBoardIO();
   private final Arm m_arm = new Arm();
-
+  UltrasonicSensor m_ultrasonicSensor = new UltrasonicSensor();
   // Assumes a gamepad plugged into channel 0
   private final CommandXboxController m_controller = new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
@@ -63,13 +64,17 @@ public class RobotContainer {
     m_controller.b()
         .onTrue(m_arm.setAngleDegreesCommand(90.0))
         .onFalse(m_arm.setAngleDegreesCommand(KArmMinDegrees));
+
+    m_ultrasonicSensor.getCollisionTrigger()
+        .onTrue(m_drivetrain.turnDegreesCommand(0.5, 90.0));
   }
 
   private void configureAutonomousCommands() {
        // Setup the SmartDashboard chooser for autonomous routines
     m_chooser.setDefaultOption("Auto Routine Distance",  m_autonomousCommandFactory.autonomousDistanceCommand(m_drivetrain));
     m_chooser.addOption("Auto Routine Time", m_autonomousCommandFactory.autonomousTimeCommand(m_drivetrain));
-    SmartDashboard.putData(m_chooser);  }
+    SmartDashboard.putData(m_chooser);  
+  }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *

@@ -18,6 +18,12 @@ public final class HardwareIDs {
         public static final int kRightEncoderB = 7;
     }
 
+    public static class AnalogInputIDs {
+        public static final int kLeftReflectanceSensorID = 0;
+        public static final int kRightReflectanceSensorID = 1;
+        public static final int kUltrasonicSensorID = 2;
+    }
+
     public static final int kGyroID = 0;
     public static final int kArmServoID = 4;
 }

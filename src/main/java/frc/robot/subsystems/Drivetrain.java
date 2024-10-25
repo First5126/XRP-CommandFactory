@@ -81,23 +81,23 @@ public class Drivetrain extends SubsystemBase {
     m_rightEncoder.reset();
   }
 
-  private int getLeftEncoderCount() {
+  public int getLeftEncoderCount() {
     return m_leftEncoder.get();
   }
 
-  private int getRightEncoderCount() {
+  public int getRightEncoderCount() {
     return m_rightEncoder.get();
   }
 
-  private double getLeftDistanceInch() {
+  public double getLeftDistanceInch() {
     return m_leftEncoder.getDistance();
   }
 
-  private double getRightDistanceInch() {
+  public double getRightDistanceInch() {
     return m_rightEncoder.getDistance();
   }
 
-  private double getAverageDistanceInch() {
+  public double getAverageDistanceInch() {
     return (getLeftDistanceInch() + getRightDistanceInch()) / 2.0;
   }
 
@@ -106,7 +106,7 @@ public class Drivetrain extends SubsystemBase {
    *
    * @return The acceleration of the XRP along the X-axis in Gs
    */
-  private double getAccelX() {
+  public double getAccelX() {
     return m_accelerometer.getX();
   }
 
@@ -115,7 +115,7 @@ public class Drivetrain extends SubsystemBase {
    *
    * @return The acceleration of the XRP along the Y-axis in Gs
    */
-  private double getAccelY() {
+  public double getAccelY() {
     return m_accelerometer.getY();
   }
 
@@ -124,7 +124,7 @@ public class Drivetrain extends SubsystemBase {
    *
    * @return The acceleration of the XRP along the Z-axis in Gs
    */
-  private double getAccelZ() {
+  public double getAccelZ() {
     return m_accelerometer.getZ();
   }
 
@@ -133,7 +133,7 @@ public class Drivetrain extends SubsystemBase {
    *
    * @return The current angle of the XRP in degrees
    */
-  private double getGyroAngleX() {
+  public double getGyroAngleX() {
     return m_gyro.getAngleX();
   }
 
@@ -142,7 +142,7 @@ public class Drivetrain extends SubsystemBase {
    *
    * @return The current angle of the XRP in degrees
    */
-  private double getGyroAngleY() {
+  public double getGyroAngleY() {
     return m_gyro.getAngleY();
   }
 
@@ -151,7 +151,7 @@ public class Drivetrain extends SubsystemBase {
    *
    * @return The current angle of the XRP in degrees
    */
-  private double getGyroAngleZ() {
+  public double getGyroAngleZ() {
     return m_gyro.getAngleZ();
   }
 
@@ -165,7 +165,7 @@ public class Drivetrain extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  private double getAverageTurningDistance() {
+  public double getAverageTurningDistance() {
     double leftDistance = Math.abs(getLeftDistanceInch());
     double rightDistance = Math.abs(getRightDistanceInch());
     return (leftDistance + rightDistance) / 2.0;
@@ -173,7 +173,7 @@ public class Drivetrain extends SubsystemBase {
 
   public Command getArcadeDriveCommand(CommandXboxController controller) {
     Supplier<Double> driveVelocity = () -> -controller.getLeftY();
-    Supplier<Double> rotateVelocity = controller::getRightX;
+    Supplier<Double> rotateVelocity = () -> -controller.getRightX();
     return run(()->arcadeDrive(driveVelocity, rotateVelocity));
   }
 

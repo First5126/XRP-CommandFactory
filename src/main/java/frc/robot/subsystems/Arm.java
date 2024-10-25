@@ -32,6 +32,12 @@ public class Arm extends SubsystemBase {
     m_armServo.setAngle(angleDeg);
   }
 
+  /**
+   * Sets the angle of the arm in degrees.
+   * 
+   * @param angleDeg the desired angle in degrees
+   * @return the Command object that sets the angle
+   */
   public Command setAngleDegreesCommand(double angleDeg) {
     return runOnce(()->setAngle(angleDeg));
   }
