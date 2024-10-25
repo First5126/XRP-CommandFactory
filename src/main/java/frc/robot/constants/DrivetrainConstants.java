@@ -5,7 +5,7 @@
 package frc.robot.constants;
 
 /** Add your docs here. */
-public class DrivetrainConstants {
+public final class DrivetrainConstants {
     /* Need to convert distance travelled to degrees. The Standard
        XRP Chassis found here, https://www.sparkfun.com/products/22230,
        has a wheel placement diameter (163 mm) - width of the wheel (8 mm) = 155 mm

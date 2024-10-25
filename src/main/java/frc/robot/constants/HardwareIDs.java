@@ -5,7 +5,7 @@
 package frc.robot.constants;
 
 /** Add your docs here. */
-public class HardwareIDs {
+public final class HardwareIDs {
     public static class MotorIDs {
         public static final int kLeftDriveMotorID = 0;
         public static final int kRightDriveMotorID = 1;
