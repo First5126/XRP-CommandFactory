@@ -18,6 +18,19 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+  private static Robot m_instance;
+
+  public static Robot getInstance() {
+    if (m_instance == null) {
+      m_instance = new Robot();
+    }
+    return m_instance;
+  }
+
+  public Robot(){
+    super();
+    m_instance = this;
+  }
 
   /**
    * This function is run when the robot is first started up and should be used for any

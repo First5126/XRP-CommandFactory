@@ -29,7 +29,10 @@ public class Arm extends SubsystemBase {
    * @param angleDeg Desired arm angle in degrees
    */
   private void setAngle(double angleDeg) {
-    m_armServo.setAngle(angleDeg);
+    // Ensure the angle is within the valid range
+    if (angleDeg >= 0 && angleDeg <=180) {
+      m_armServo.setAngle(angleDeg);
+    }
   }
 
   /**
