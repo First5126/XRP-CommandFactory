@@ -34,7 +34,6 @@ public class UltrasonicSensor {
      */
     public double getDistanceMilimeters() {
         double distance = m_RawSensorValue / UltrasonicConstants.kMaxVoltage * (UltrasonicConstants.kMaxDistanceMilimeters - UltrasonicConstants.kMinDistanceMilimeters) + UltrasonicConstants.kMinDistanceMilimeters;
-        SmartDashboard.putNumber("Distance",distance);
         return distance;
     }
 
