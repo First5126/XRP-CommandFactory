@@ -7,6 +7,9 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.xrp.XRPServo;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import static frc.robot.constants.ArmConstants.ArmPositions.kArmMinDegrees;
+import static frc.robot.constants.ArmConstants.ArmPositions.kArmMaxDegrees;
+
 import static frc.robot.constants.HardwareIDs.kArmServoID;
 
 public class Arm extends SubsystemBase {
@@ -30,7 +33,7 @@ public class Arm extends SubsystemBase {
    */
   private void setAngle(double angleDeg) {
     // Ensure the angle is within the valid range
-    if (angleDeg >= 0 && angleDeg <=180) {
+    if (angleDeg >= kArmMinDegrees && angleDeg <= kArmMaxDegrees) {
       m_armServo.setAngle(angleDeg);
     }
   }

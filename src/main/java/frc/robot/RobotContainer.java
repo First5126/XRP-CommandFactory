@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import static frc.robot.constants.ArmConstants.ArmPositions.KArmMinDegrees;
+import static frc.robot.constants.ArmConstants.ArmPositions.kArmMinDegrees;
 import static frc.robot.constants.DrivetrainConstants.LineFollowingConstants;
 
 /**
@@ -62,11 +62,11 @@ public class RobotContainer {
 
     m_controller.a()
         .onTrue(m_arm.rotateToDegreesCommand(45))
-        .onFalse(m_arm.rotateToDegreesCommand(KArmMinDegrees));
+        .onFalse(m_arm.rotateToDegreesCommand(kArmMinDegrees));
 
     m_controller.b()
         .onTrue(m_arm.rotateToDegreesCommand(90.0))
-        .onFalse(m_arm.rotateToDegreesCommand(KArmMinDegrees));
+        .onFalse(m_arm.rotateToDegreesCommand(kArmMinDegrees));
 
     m_ultrasonicSensor.getCollisionTrigger()
         .onTrue(m_drivetrain.turnDegreesCommand(LineFollowingConstants.kLineSpeed, 90.0));

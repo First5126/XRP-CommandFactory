@@ -12,7 +12,7 @@ public final class ArmConstants {
      * The ArmPositions class contains constants related to the arm positions.
      */
     public final static class ArmPositions{
-        public static final double KArmMinDegrees = 0.0;
+        public static final double kArmMinDegrees = 0.0;
         public static final double kArmMaxDegrees = 180.0;
     }
 }
