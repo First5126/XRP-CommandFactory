@@ -241,6 +241,13 @@ public class Drivetrain extends SubsystemBase {
         ()-> getAverageTurningDistance() >= kInchesPerDegree * degrees,this);
   }
 
+  /**
+   * Creates a command to drive the robot in a straight line.
+   * 
+   * @param speed The speed at which to drive the robot.
+   * @param difference The difference between the left and right line sensors.
+   * @return The command to drive the robot in a straight line.
+   */
   public Command driveLine(double speed, Supplier<Double> difference){
     return runEnd(
       ()->arcadeDrive(speed, LineFollowingConstants.kTurnP *  difference.get()),

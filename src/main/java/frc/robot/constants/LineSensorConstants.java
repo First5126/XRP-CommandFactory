@@ -4,7 +4,13 @@
 
 package frc.robot.constants;
 
-/** Add your docs here. */
+/**
+ * The LineSensorConstants class contains constants related to line sensor detection.
+ */
 public class LineSensorConstants {
+    /**
+     * The detection threshold for line sensor readings.
+     * If a line sensor reading is above this threshold, it is considered as detecting a line.
+     */
     public static final double kDetectionThreshold = 2.0;
 }

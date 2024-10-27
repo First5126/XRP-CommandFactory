@@ -41,7 +41,7 @@ public class Arm extends SubsystemBase {
    * @param angleDeg the desired angle in degrees
    * @return the Command object that sets the angle
    */
-  public Command setAngleDegreesCommand(double angleDeg) {
+  public Command rotateToDegreesCommand(double angleDeg) {
     return runOnce(()->setAngle(angleDeg));
   }
 }

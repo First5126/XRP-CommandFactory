@@ -4,7 +4,9 @@
 
 package frc.robot.constants;
 
-/** Add your docs here. */
+/**
+ * The UltrasonicConstants class contains constants related to ultrasonic sensors.
+ */
 public final class UltrasonicConstants {
     public final static double kMinVoltage = 0;
     public final static double kMaxVoltage = 5;

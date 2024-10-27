@@ -6,6 +6,7 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.constants.DrivetrainConstants;
+import frc.robot.constants.DrivetrainConstants.LineFollowingConstants;
 import frc.robot.sensors.LineSensor;
 import frc.robot.sensors.UltrasonicSensor;
 import frc.robot.subsystems.Arm;
@@ -31,7 +32,7 @@ public class RobotContainer {
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final XRPOnBoardIO m_onboardIO = new XRPOnBoardIO();
   private final Arm m_arm = new Arm();
-  UltrasonicSensor m_ultrasonicSensor = new UltrasonicSensor();
+  private final UltrasonicSensor m_ultrasonicSensor = new UltrasonicSensor();
   // Assumes a gamepad plugged into channel 0
   private final CommandXboxController m_controller = new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
@@ -62,12 +63,12 @@ public class RobotContainer {
         .onFalse(new PrintCommand("USER Button Released"));
 
     m_controller.a()
-        .onTrue(m_arm.setAngleDegreesCommand(45))
-        .onFalse(m_arm.setAngleDegreesCommand(KArmMinDegrees));
+        .onTrue(m_arm.rotateToDegreesCommand(45))
+        .onFalse(m_arm.rotateToDegreesCommand(KArmMinDegrees));
 
     m_controller.b()
-        .onTrue(m_arm.setAngleDegreesCommand(90.0))
-        .onFalse(m_arm.setAngleDegreesCommand(KArmMinDegrees));
+        .onTrue(m_arm.rotateToDegreesCommand(90.0))
+        .onFalse(m_arm.rotateToDegreesCommand(KArmMinDegrees));
 
     m_ultrasonicSensor.getCollisionTrigger()
         .onTrue(m_drivetrain.turnDegreesCommand(LineFollowingConstants.kLineSpeed, 90.0));
