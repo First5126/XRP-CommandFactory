@@ -5,8 +5,6 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.constants.DrivetrainConstants;
-import frc.robot.constants.DrivetrainConstants.LineFollowingConstants;
 import frc.robot.sensors.LineSensor;
 import frc.robot.sensors.UltrasonicSensor;
 import frc.robot.subsystems.Arm;
