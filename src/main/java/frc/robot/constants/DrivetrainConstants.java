@@ -18,4 +18,9 @@ public final class DrivetrainConstants {
     public static final double kCountsPerMotorShaftRev = 12.0;
     public static final double kCountsPerRevolution = kCountsPerMotorShaftRev * kGearRatio; // 585.0
     public static final double kWheelDiameterInch = 2.3622; // 60 mm
+
+    public static class LineFollowingConstants {
+        public static final double kTurnP = .75;
+        public static final double kLineSpeed = 0.2;
+    }
 }

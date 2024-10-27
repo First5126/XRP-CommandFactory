@@ -5,6 +5,8 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.constants.DrivetrainConstants;
+import frc.robot.sensors.LineSensor;
 import frc.robot.sensors.UltrasonicSensor;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
@@ -16,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import static frc.robot.constants.ArmConstants.ArmPositions.KArmMinDegrees;
+import static frc.robot.constants.DrivetrainConstants.LineFollowingConstants;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -34,6 +37,7 @@ public class RobotContainer {
 
   // Create SmartDashboard chooser for autonomous routines
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
+  private final LineSensor m_lineSensor = new LineSensor();
 
   private AutonomousCommandFactory m_autonomousCommandFactory = new AutonomousCommandFactory();
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -66,7 +70,10 @@ public class RobotContainer {
         .onFalse(m_arm.setAngleDegreesCommand(KArmMinDegrees));
 
     m_ultrasonicSensor.getCollisionTrigger()
-        .onTrue(m_drivetrain.turnDegreesCommand(0.5, 90.0));
+        .onTrue(m_drivetrain.turnDegreesCommand(LineFollowingConstants.kLineSpeed, 90.0));
+
+    m_controller.x().and(m_lineSensor.lineDetectedTrigger())
+      .whileTrue(m_drivetrain.driveLine(.5,m_lineSensor::getDifference));
   }
 
   private void configureAutonomousCommands() {

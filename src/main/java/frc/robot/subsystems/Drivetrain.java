@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.xrp.XRPGyro;
 import edu.wpi.first.wpilibj.xrp.XRPMotor;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.FunctionalCommand;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
@@ -26,6 +27,7 @@ import static frc.robot.constants.HardwareIDs.EncoderIDs.kLeftEncoderA;
 import static frc.robot.constants.HardwareIDs.EncoderIDs.kLeftEncoderB;
 import static frc.robot.constants.HardwareIDs.EncoderIDs.kRightEncoderA;
 import static frc.robot.constants.HardwareIDs.EncoderIDs.kRightEncoderB;
+import static frc.robot.constants.DrivetrainConstants.LineFollowingConstants;
 
 public class Drivetrain extends SubsystemBase {
 
@@ -72,6 +74,7 @@ public class Drivetrain extends SubsystemBase {
   private void arcadeDrive(Supplier<Double> xaxisSpeed, Supplier<Double> zaxisRotate) {
     arcadeDrive(xaxisSpeed.get(), zaxisRotate.get());
   }
+
   private void arcadeDrive(Double xaxisSpeed, Double zaxisRotate) {
     m_diffDrive.arcadeDrive(xaxisSpeed, zaxisRotate);
   }
@@ -236,5 +239,11 @@ public class Drivetrain extends SubsystemBase {
         () -> arcadeDrive( 0.0, speed),
         (interrupted) ->  arcadeDrive( 0.0, 0.0),
         ()-> getAverageTurningDistance() >= kInchesPerDegree * degrees,this);
+  }
+
+  public Command driveLine(double speed, Supplier<Double> difference){
+    return runEnd(
+      ()->arcadeDrive(speed, LineFollowingConstants.kTurnP *  difference.get()),
+      ()->arcadeDrive(0.0, 0.0)).alongWith(new PrintCommand("difference = " + difference.get() + " output = " + LineFollowingConstants.kTurnP * difference.get() ));
   }
 }
