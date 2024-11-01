@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.constants.DrivetrainConstants.LineFollowingConstants;
 import frc.robot.sensors.LineSensor;
 import frc.robot.sensors.UltrasonicSensor;
 import frc.robot.subsystems.Arm;
@@ -18,6 +19,8 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import static frc.robot.constants.ArmConstants.ArmPositions.kArmMinDegrees;
 import static frc.robot.constants.DrivetrainConstants.LineFollowingConstants;
+
+import java.util.function.Supplier;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -52,7 +55,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     // Default command is arcade drive. This will run unless another command
     // is scheduled over it.
-    m_drivetrain.setDefaultCommand(m_drivetrain.getArcadeDriveCommand(m_controller));
+    m_drivetrain.setDefaultCommand(m_drivetrain.arcadeDriveCommand(() -> -m_controller.getLeftY(),() -> -m_controller.getRightX()));
 
     // Example of how to use the onboard IO
     Trigger userButton = new Trigger(m_onboardIO::getUserButtonPressed);

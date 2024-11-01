@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.FunctionalCommand;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 import static frc.robot.constants.DrivetrainConstants.kCountsPerRevolution;
 import static frc.robot.constants.DrivetrainConstants.kInchesPerDegree;
@@ -174,9 +173,7 @@ public class Drivetrain extends SubsystemBase {
     return (leftDistance + rightDistance) / 2.0;
   }
 
-  public Command getArcadeDriveCommand(CommandXboxController controller) {
-    Supplier<Double> driveVelocity = () -> -controller.getLeftY();
-    Supplier<Double> rotateVelocity = () -> -controller.getRightX();
+  public Command arcadeDriveCommand(Supplier<Double> driveVelocity, Supplier<Double> rotateVelocity) {
     return run(()->arcadeDrive(driveVelocity, rotateVelocity));
   }
 
